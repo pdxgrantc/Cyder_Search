@@ -22,6 +22,6 @@ def process_data(data):
     try:
         json_data = json.loads(data)
         response = {'message': 'Processed data successfully'}
-        return json.dumps(response)
+        return json.dumps(json_data)    #return json.dumps(response) #<--- testing
     except json.JSONDecodeError:
         return json.dumps({'error': 'Invalid JSON'})

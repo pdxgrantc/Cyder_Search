@@ -1,25 +1,25 @@
+// write a node js server that listens on port 3000 and serves a react app at ../front_end/build/index.html
+// use express and path modules
+// use express.static to serve the static files in ../front_end/build
+// use app.get to serve the index.html file
+// use app.listen to listen on port 3000
+
+
+// Path: back_end/server.js
+
 const express = require('express');
-const serveStatic = require('serve-static');
+const path = require('path');
+
 const app = express();
-const port = 3000; // Change this to the desired port number (e.g., 8000, 8080, etc.)
 
-// Serve static files from the "front_end/build" directory with custom MIME types
-app.use(serveStatic('front_end/build', { 
-  setHeaders: (res, path) => {
-    if (path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'application/javascript');
-    } else if (path.endsWith('.css')) {
-      res.setHeader('Content-Type', 'text/css');
-    }
-  }
-}));
+app.use(express.static(path.join(__dirname, '../front_end/build')));
 
-// Route handling
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: __dirname + '/../front_end/build' });
-});
+  res.sendFile(path.join(__dirname, '../front_end/build/index.html'));
+}
+);
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+app.listen(3000, () => {
+  console.log('Listening on port 3000');
+}
+);

@@ -12,9 +12,11 @@ app.use(express.static(path.join(__dirname, '../front_end/build')));
 app.post('/api/search', async (req, res) => {
   const data = req.body;
 
-  console.log(data);
+  console.log(data)
 
-  res.status(200);
+
+
+  res.send(data);
 }
 );
 

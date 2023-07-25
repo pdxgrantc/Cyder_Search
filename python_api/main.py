@@ -17,7 +17,7 @@ if __name__ == '__main__':
     json_data = json.loads(input_data)
 
 
-    print(json_data)
+    #print(json_data)
 
 
     response_data = (lib.api_connect(endpoints.CORE_SYSTEM, json_data)).decode().replace("/api/v1", "")

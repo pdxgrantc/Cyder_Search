@@ -15,13 +15,14 @@ app.use(express.static(path.join(__dirname, '../front_end/build')));
 app.post('/api/search', async (req, res) => {
   const data = req.body;
 
-  const query = createQuery(data);
+  var query = createQuery(data);
 
   console.log(query);
 
   const pythonProcess = spawn('python3', ['../python_api/main.py']);
 
-  
+  // stringify the query object
+  query = JSON.stringify(query);
 
   // Send the JSON object to the Python script as a string
   pythonProcess.stdin.write(query);

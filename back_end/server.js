@@ -1,4 +1,5 @@
 const express = require('express');
+const { spawn } = require('child_process');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { create } = require('domain');
@@ -17,6 +18,27 @@ app.post('/api/search', async (req, res) => {
   console.log(data);
 
   const query = createQuery(data);
+
+  const pythonProcess = spawn('python3', ['../python_api/main.py']);
+
+  // Send the JSON object to the Python script as a string
+  pythonProcess.stdin.write(JSON.stringify(query));
+  pythonProcess.stdin.end();
+
+  pythonProcess.stdout.on('data', (outputData) => {
+    // Process the output from the Python script, if needed
+    console.log(outputData.toString());
+  });
+
+  pythonProcess.stderr.on('data', (outputError) => {
+    // Handle any error messages from the Python script, if needed
+    console.error(outputError.toString());
+  });
+
+  pythonProcess.on('close', (code) => {
+    // Python script has finished running
+    console.log(`Python script exited with code ${code}`);
+  });
 
   console.log(query);
 

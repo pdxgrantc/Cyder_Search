@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <div className='max-w-screen min-h-screen text-small bg-dark_grey text'>
             <Helmet>
-                <title>Cyder Search</title>
+                <title>Better Cyder Search</title>
             </Helmet>
             <Header />
             <div className='h-[2rem]'></div>
@@ -300,7 +300,7 @@ function Input() {
                 <button
                     type='submit'
                     onClick={handleSubmit}
-                    className='font-semibold w-auto h-auto rounded bg-button_orange hover:bg-button_orange_hover hover:text-black text px-[.5rem] py-[.15rem] hover:px-[1.25rem]'
+                    className='transition-all duration-300 ease-cubic-bezier font-semibold w-auto h-auto rounded bg-button_orange hover:bg-button_orange_hover hover:text-black text px-[.5rem] py-[.15rem] hover:px-[1.25rem]'
                 >
                     Submit
                 </button>

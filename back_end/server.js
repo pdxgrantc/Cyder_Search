@@ -15,14 +15,16 @@ app.use(express.static(path.join(__dirname, '../front_end/build')));
 app.post('/api/search', async (req, res) => {
   const data = req.body;
 
-  console.log(data);
-
   const query = createQuery(data);
+
+  console.log(query);
 
   const pythonProcess = spawn('python3', ['../python_api/main.py']);
 
+  
+
   // Send the JSON object to the Python script as a string
-  pythonProcess.stdin.write(JSON.stringify(query));
+  pythonProcess.stdin.write(query);
   pythonProcess.stdin.end();
 
   pythonProcess.stdout.on('data', (outputData) => {
@@ -39,8 +41,6 @@ app.post('/api/search', async (req, res) => {
     // Python script has finished running
     console.log(`Python script exited with code ${code}`);
   });
-
-  console.log(query);
 
   res.sendStatus(200);
 });

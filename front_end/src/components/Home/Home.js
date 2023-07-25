@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 
 import Header from '../Header/Header'
@@ -46,22 +46,22 @@ function Input() {
         setCtnr(event.target.value)
     };
 
-    const validateAndFormatMacAddress = (input) => {
+    function validateAndFormatMacAddress(input) {
         // Remove any existing colons and convert to uppercase
         const sanitizedInput = input.replace(/:/g, '').toUpperCase();
-      
+
         // Check if the input has exactly 12 hexadecimal characters
         if (!/^[0-9A-F]{12}$/i.test(sanitizedInput)) {
-          return 'Invalid MAC address. It should have 12 hexadecimal characters (0-9, A-F).';
+            return '';
         }
-      
+
         // Insert colons after every 2 characters
         const formattedMacAddress = sanitizedInput.replace(/(.{2})/g, '$1:');
-      
+
         // Remove the trailing colon at the end
         return formattedMacAddress.slice(0, -1);
-      }
-      
+    }
+
 
     const ClearForm = () => {
         setName('')
@@ -85,7 +85,9 @@ function Input() {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        setMacAddr(validateAndFormatMacAddress(macAddr))
+        // validate and format mac address
+        const formattedMacAddress = validateAndFormatMacAddress(macAddr)
+        setMacAddr(formattedMacAddress)
 
         const data = {
             name: name,
@@ -95,7 +97,7 @@ function Input() {
             location: location,
             hardwareType: hardwareType,
             ipAddr: ipAddr,
-            macAddr: macAddr,
+            macAddr: formattedMacAddress,
         }
 
         // send to server at /api/search
@@ -117,136 +119,181 @@ function Input() {
 
     return (
         <form className='flex flex-col gap-2 text-black'>
-            <div>
-                <select className='rounded' id="selectOption" value={ctnr} onChange={handleCtnrChange}>
+            <div className='flex gap-4'>
+                <label className='text outline-none' htmlFor="selectOption">Container: </label>
+                <select className='rounded px-[.5rem] py-[.25rem]' id="selectOption" value={ctnr} onChange={handleCtnrChange}>
                     <option value="'i:ctnr__contains':'/70/'">Forestry</option>
                     <option value="">All</option>
                 </select>
             </div>
-            <div className='flex gap-4'>
+            <div className='grid grid-cols-2 gap-x-4 gap-y-2'>
                 <input
                     type='text'
-                    className='w-[50vw] h-[2rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
+                    className='outline-none w-auto h-[2rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
                     placeholder="Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     id="name"
                 />
-                <input
-                    type='checkbox'
-                    className='w-[1rem] h-[1rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
-                    checked={useName}
-                    onChange={(e) => setUseName(e.target.checked)}
-                    id="useName"
-                />
-            </div>
-            <div className='flex gap-4'>
+                <div className='flex gap-2 h-fit'>
+                    <label
+                        htmlFor='useName'
+                        className='text-white text-small'
+                    >
+                        Use Empty String:
+                    </label>
+                    <input
+                        type='checkbox'
+                        className='w-[1rem] my-auto h-[1rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
+                        checked={useName}
+                        onChange={(e) => setUseName(e.target.checked)}
+                        id="useName"
+                    />
+                </div>
                 <input
                     type='text'
-                    className='w-[50vw] h-[2rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
+                    className='outline-none w-auto h-[2rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
                     placeholder="PO Number"
                     value={poNumber}
                     onChange={(e) => setPoNumber(e.target.value)}
                     id="poNumber"
                 />
-                <input
-                    type='checkbox'
-                    className='w-[1rem] h-[1rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
-                    checked={usePoNumber}
-                    onChange={(e) => setUsePoNumber(e.target.checked)}
-                    id="usePoNumber"
-                />
-            </div>
-            <div className='flex gap-4'>
+                <div className='flex gap-2 h-fit'>
+                    <label
+                        htmlFor='usePoNumber'
+                        className='text-white text-small'
+                    >
+                        Use Empty String:
+                    </label>
+                    <input
+                        type='checkbox'
+                        className='w-[1rem] my-auto h-[1rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
+                        checked={usePoNumber}
+                        onChange={(e) => setUsePoNumber(e.target.checked)}
+                        id="usePoNumber"
+                    />
+                </div>
                 <input
                     type='text'
-                    className='w-[50vw] h-[2rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
+                    className='outline-none w-auto h-[2rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
                     placeholder="Serial Number"
                     value={serialNumber}
                     onChange={(e) => setSerialNumber(e.target.value)}
                     id="serialNumber"
                 />
-                <input
-                    type='checkbox'
-                    className='w-[1rem] h-[1rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
-                    checked={useSerialNumber}
-                    onChange={(e) => setUseSerialNumber(e.target.checked)}
-                    id="useSerialNumber"
-                />
-            </div>
-            <div className='flex gap-4'>
+                <div className='flex gap-2 h-fit'>
+                    <label
+                        htmlFor='useSerialNumber'
+                        className='text-white text-small'
+                    >
+                        Use Empty String:
+                    </label>
+                    <input
+                        type='checkbox'
+                        className='w-[1rem] my-auto h-[1rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
+                        checked={useSerialNumber}
+                        onChange={(e) => setUseSerialNumber(e.target.checked)}
+                        id="useSerialNumber"
+                    />
+                </div>
                 <input
                     type='text'
-                    className='w-[50vw] h-[2rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
+                    className='outline-none w-auto h-[2rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
                     placeholder="Location"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     id="location"
                 />
-                <input
-                    type='checkbox'
-                    className='w-[1rem] h-[1rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
-                    checked={useLocation}
-                    onChange={(e) => setUseLocation(e.target.checked)}
-                    id="useLocation"
-                />
-            </div>
-            <div className='flex gap-4'>
+                <div className='flex gap-2 h-fit'>
+                    <label
+                        htmlFor='useLocation'
+                        className='text-white text-small'
+                    >
+                        Use Empty String:
+                    </label>
+                    <input
+                        type='checkbox'
+                        className='w-[1rem] my-auto h-[1rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
+                        checked={useLocation}
+                        onChange={(e) => setUseLocation(e.target.checked)}
+                        id="useLocation"
+                    />
+                </div>
                 <input
                     type='text'
-                    className='w-[50vw] h-[2rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
+                    className='outline-none w-auto h-[2rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
                     placeholder="Hardware Type"
                     value={hardwareType}
                     onChange={(e) => setHardwareType(e.target.value)}
                     id="hardwareType"
                 />
-                <input
-                    type='checkbox'
-                    className='w-[1rem] h-[1rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
-                    checked={useHardwareType}
-                    onChange={(e) => setUseHardwareType(e.target.checked)}
-                    id="useHardwareType"
-                />
-            </div>
-            <div className='flex gap-4'>
+                <div className='flex gap-2 h-fit'>
+                    <label
+                        htmlFor='useHardwareType'
+                        className='text-white text-small'
+                    >
+                        Use Empty String:
+                    </label>
+                    <input
+                        type='checkbox'
+                        className='w-[1rem] my-auto h-[1rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
+                        checked={useHardwareType}
+                        onChange={(e) => setUseHardwareType(e.target.checked)}
+                        id="useHardwareType"
+                    />
+                </div>
                 <input
                     type='text'
-                    className='w-[50vw] h-[2rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
+                    className='outline-none w-auto h-[2rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
                     placeholder="IP Address"
                     value={ipAddr}
                     onChange={(e) => setIpAddr(e.target.value)}
                     id="ipAddr"
                 />
-                <input
-                    type='checkbox'
-                    className='w-[1rem] h-[1rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
-                    checked={useIP}
-                    onChange={(e) => setUseIP(e.target.checked)}
-                    id="useIP"
-                />
-            </div>
-            <div className='flex gap-4'>
+                <div className='flex gap-2 h-fit'>
+                    <label
+                        htmlFor='useIP'
+                        className='text-white text-small'
+                    >
+                        Use Empty String:
+                    </label>
+                    <input
+                        type='checkbox'
+                        className='w-[1rem] my-auto h-[1rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
+                        checked={useIP}
+                        onChange={(e) => setUseIP(e.target.checked)}
+                        id="useIP"
+                    />
+                </div>
                 <input
                     type='text'
-                    className='w-[50vw] h-[2rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
+                    className='outline-none w-auto h-[2rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
                     placeholder="MAC Address"
                     value={macAddr}
                     onChange={(e) => setMacAddr(e.target.value)}
                     id="macAddr"
                 />
-                <input
-                    type='checkbox'
-                    className='w-[1rem] h-[1rem] rounded bg-input_bg_color text-text_white px-[1rem] py-[.5rem] text-small'
-                    checked={useMac}
-                    onChange={(e) => setUseMac(e.target.checked)}
-                    id="useMac"
-                />
+                <div className='flex gap-2 h-fit'>
+                    <label
+                        htmlFor='useMac'
+                        className='text-white text-small'
+                    >
+                        Use Empty String:
+                    </label>
+                    <input
+                        type='checkbox'
+                        className='w-[1rem] my-auto h-[1rem] rounded bg-input_bg_color text-text_white px-[.5rem] py-[.5rem] text-small'
+                        checked={useMac}
+                        onChange={(e) => setUseMac(e.target.checked)}
+                        id="useMac"
+                    />
+                </div>
             </div>
             <div>
                 <button
                     type='submit'
                     onClick={handleSubmit}
-                    className='w-[50vw] h-[2rem] rounded bg-button_accent_color text-text_white px-[1rem] py-[.5rem] text-small'
+                    className='w-auto h-auto rounded bg-button_grey text-text_white px-[.5rem] py-[.5rem] text-small'
                 >
                     Submit
                 </button>

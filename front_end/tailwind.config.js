@@ -92,7 +92,7 @@ module.exports = {
         'sm': '0.125rem',
         button: '0.25rem',
         'md': '0.375rem',
-        DEFAULT: '0.5rem',
+        DEFAULT: '0.25rem',
         'xl': '0.75rem',
         '2xl': '1rem',
         main_box: '1rem',

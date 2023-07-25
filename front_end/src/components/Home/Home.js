@@ -5,7 +5,7 @@ import Header from '../Header/Header'
 
 export default function Home() {
     return (
-        <div className='max-w-screen min-h-screen text-small bg-bg text'>
+        <div className='max-w-screen min-h-screen text-small bg-dark_grey text'>
             <Helmet>
                 <title>Cyder Search</title>
             </Helmet>
@@ -300,7 +300,7 @@ function Input() {
                 <button
                     type='submit'
                     onClick={handleSubmit}
-                    className='w-auto h-auto rounded bg-button_grey hover:bg-button_grey_hover text-text_white px-[.5rem] py-[.25rem] text-small'
+                    className='font-semibold w-auto h-auto rounded bg-button_orange hover:bg-button_orange_hover hover:text-black text px-[.5rem] py-[.15rem] hover:px-[1.25rem]'
                 >
                     Submit
                 </button>

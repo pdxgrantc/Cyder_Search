@@ -91,13 +91,20 @@ function Input() {
 
         const data = {
             name: name,
+            useName: useName,
             ctnr: ctnr,
             poNumber: poNumber,
+            usePoNumber: usePoNumber,
             serialNumber: serialNumber,
+            useSerialNumber: useSerialNumber,
             location: location,
+            useLocation: useLocation,
             hardwareType: hardwareType,
+            useHardwareType: useHardwareType,
             ipAddr: ipAddr,
+            useIP: useIP,
             macAddr: formattedMacAddress,
+            useMac: useMac
         }
 
         // send to server at /api/search
@@ -122,7 +129,7 @@ function Input() {
             <div className='flex gap-4'>
                 <label className='text outline-none' htmlFor="selectOption">Container: </label>
                 <select className='rounded px-[.5rem] py-[.25rem]' id="selectOption" value={ctnr} onChange={handleCtnrChange}>
-                    <option value="'i:ctnr__contains':'/70/'">Forestry</option>
+                    <option value="'/70/'">Forestry</option>
                     <option value="">All</option>
                 </select>
             </div>
@@ -293,7 +300,7 @@ function Input() {
                 <button
                     type='submit'
                     onClick={handleSubmit}
-                    className='w-auto h-auto rounded bg-button_grey text-text_white px-[.5rem] py-[.5rem] text-small'
+                    className='w-auto h-auto rounded bg-button_grey hover:bg-button_grey_hover text-text_white px-[.5rem] py-[.25rem] text-small'
                 >
                     Submit
                 </button>

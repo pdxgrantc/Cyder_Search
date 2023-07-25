@@ -20,6 +20,8 @@ if __name__ == '__main__':
     print(json_data)
 
 
-    response_data = lib.to_json((lib.api_connect(endpoints.CORE_SYSTEM, json_data)).decode().replace("/api/v1", ""))
+    response_data = (lib.api_connect(endpoints.CORE_SYSTEM, json_data)).decode().replace("/api/v1", "")
+    print(response_data)
+    json_convert = lib.to_json(response_data)
     sys.stdout.write(response_data)
     sys.stdout.flush()

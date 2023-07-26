@@ -25,32 +25,85 @@ async function CORE_SYS_API_CALL(query_str) {
   // call core_system endpoint
   console.log(query_str);
   const name_results = [];
-  const po_number_results = [];
-  const serial_number_results = [];
-  const hardware_type_results = [];
-  const location_results = [];
+  var po_number_results = {};
+  var serial_number_results = {};
+  var hardware_type_results = {};
+  var location_results = {};
 
-  const queries = [];
   if (query_str.po_number) {
     var query = "a:PO number=" + query_str.po_number;
-    queries.push(query);
-  }
-  if (query_str.serial_number) {
-    var query = "a:Serial number=" + query_str.serial_number;
-    queries.push(query);
-  }
-  if (query_str.hardware_type) {
-    var query = "a:Hardware type=" + query_str.hardware_type;
-    queries.push(query);
-  }
-  if (query_str.location) {
-    var query = "a:Location=" + query_str.location;
-    queries.push(query);
+
+    try {
+      await api_get(CORE_SYSTEM, query).then((result) => {
+        const response_data_json = JSON.stringify(result).replace("/api/v1", "");
+        po_number_results = JSON.parse(response_data_json);
+      });
+    } catch (error) {
+      console.error('Error occurred:', error.message);
+      return JSON.stringify({ error: error.message });
+    }
+    if (query_str.serial_number) {
+      var query = "a:Serial number=" + query_str.serial_number;
+
+      try {
+        await api_get(CORE_SYSTEM, query).then((result) => {
+          const response_data_json = JSON.stringify(result).replace("/api/v1", "");
+          serial_number_results = JSON.parse(response_data_json);
+        }
+        );
+      } catch (error) {
+        console.error('Error occurred:', error.message);
+        return JSON.stringify({ error: error.message });
+      }
+    }
+    if (query_str.hardware_type) {
+      var query = "a:Hardware type=" + query_str.hardware_type;
+
+      try {
+        await api_get(CORE_SYSTEM, query).then((result) => {
+          const response_data_json = JSON.stringify(result).replace("/api/v1", "");
+          hardware_type_results = JSON.parse(response_data_json);
+        }
+        );
+      }
+      catch (error) {
+        console.error('Error occurred:', error.message);
+        return JSON.stringify({ error: error.message });
+      }
+    }
+    if (query_str.location) {
+      var query = "a:Location=" + query_str.location;
+
+      try {
+        await api_get(CORE_SYSTEM, query).then((result) => {
+          const response_data_json = JSON.stringify(result).replace("/api/v1", "");
+          location_results = JSON.parse(response_data_json);
+        });
+      } catch (error) {
+        console.error('Error occurred:', error.message);
+        return JSON.stringify({ error: error.message });
+      }
+    }
+
+    // TODO: run queries for each query string then store results in arrays
   }
 
-  // TODO: run queries for each query string then store results in arrays
+  console.log("PO NUMBER RESULTS");
+  console.log(po_number_results);
+  console.log();
+  console.log("SERIAL NUMBER RESULTS");
+  console.log(serial_number_results);
+  console.log();
+  console.log("HARDWARE TYPE RESULTS");
+  console.log(hardware_type_results);
+  console.log();
+  console.log("LOCATION RESULTS");
+  console.log(location_results);
 
+
+  return null;
 }
+
 
 
 module.exports = CORE_SYS_API_CALL;

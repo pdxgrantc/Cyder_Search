@@ -4,8 +4,35 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { create } = require('domain');
 const ipSubnetCalculator = require('ip-subnet-calculator').calculateSubnet;
+const start = require('../api_interface/lib.js')
+const util = require('util');
+const call_api = require('../api_interface/lib.js');
+
 
 const app = express();
+
+testOBJ = {
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [{
+    "systemav_set": [{ "id": "https://cyder.oregonstate.edu/core/system/attributes/213305/", "attribute": "Department", "value": "FCR" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213306/", "attribute": "Hardware type", "value": "Optiplex 7050" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213307/", "attribute": "Location", "value": "RH 313" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213308/", "attribute": "Operating system", "value": "Windows 10" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213309/", "attribute": "Owning unit", "value": "FCR" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213310/", "attribute": "PO number", "value": "P0106250" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213311/", "attribute": "Purchase date", "value": "06/07/2017" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213312/", "attribute": "Serial number", "value": "3Y7HKH2" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213313/", "attribute": "User ID", "value": "Paul Foshay" },
+    { "id": "https://cyder.oregonstate.edu/api/v1/core/system/attributes/213314/", "attribute": "Warranty date", "value": "06/07/2021" }],
+    "ctnr": "https://cyder.oregonstate.edu/api/v1/core/ctnr/70/",
+    "id": 107680,
+    "created": "2017-06-19T16:19:05",
+    "modified": "2020-03-18T10:27:29",
+    "name": "PATHOS"
+  }]
+}
 
 // Parse JSON bodies for incoming requests
 app.use(bodyParser.json());
@@ -19,31 +46,20 @@ app.post('/api/search', async (req, res) => {
 
   console.log(query);
 
-  const pythonProcess = spawn('python3', ['../python_api/main.py']);
-
-  // stringify the query object
-  query = JSON.stringify(query);
-
-  // Send the JSON object to the Python script as a string
-  pythonProcess.stdin.write(query);
-  pythonProcess.stdin.end();
-
-  pythonProcess.stdout.on('data', (outputData) => {
-    // Process the output from the Python script, if needed
-    console.log(outputData.toString());
-  });
-
-  pythonProcess.stderr.on('data', (outputError) => {
-    // Handle any error messages from the Python script, if needed
-    console.error(outputError.toString());
-  });
-
-  pythonProcess.on('close', (code) => {
-    // Python script has finished running
-    console.log(`Python script exited with code ${code}`);
-  });
-
-  res.sendStatus(200);
+  call_api(query)
+    .then((result) => {
+      // Send the response back to the client
+      // pasrse
+      console.log(result)
+      result = JSON.parse(result);
+      console.log(util.inspect(result, { depth: null }));
+      console.log(result);
+      res.status(200).json(result); // Assuming you want to return the modified JSON data.
+    })
+    .catch((error) => {
+      console.error('Error occurred:', error.message);
+      res.status(500).json({ error: error.message }); // Send an error response to the client.
+    });
 });
 
 app.get('/', (req, res) => {
@@ -53,7 +69,6 @@ app.get('/', (req, res) => {
 app.listen(3000, () => {
   console.log('Listening on port 3000');
 });
-
 
 function createQuery(data) {
   let query = {
@@ -65,22 +80,22 @@ function createQuery(data) {
     query['i:name__contains'] = data.name;
   }
   if ((data.usePoNumber) || (data.poNumber !== '')) {
-    query['i:po_number__contains'] = data.poNumber;
+    query['a:po_number__contains'] = data.poNumber;
   }
   if ((data.useSerialNumber) || (data.serialNumber !== '')) {
-    query['i:serial_number__contains'] = data.serialNumber;
+    query['a:serial_number__contains'] = data.serialNumber;
   }
   if ((data.useLocation) || (data.location !== '')) {
-    query['i:location__contains'] = data.location;
+    query['a:location__contains'] = data.location;
   }
   if ((data.useHardwareType) || (data.hardwareType !== '')) {
-    query['i:hardware_type__contains'] = data.hardwareType;
+    query['a:hardware_type__contains'] = data.hardwareType;
   }
   if ((data.useIP) || (data.ipAddr !== '')) {
-    query['i:ip_addr__contains'] = data.ipAddr;
+    query.ip_str = data.ipAddr;
   }
   if ((data.useMac) || (data.macAddr !== '')) {
-    query['i:mac_addr__contains'] = data.macAddr;
+    query.mac_addr = data.macAddr;
   }
 
   return query;

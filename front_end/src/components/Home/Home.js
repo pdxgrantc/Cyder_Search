@@ -26,7 +26,7 @@ function Input() {
     const [useName, setUseName] = useState(false)
     const [fqdn, setFqdn] = useState('')
     const [useFqdn, setUseFqdn] = useState(false)
-    const [ctnr, setCtnr] = useState("'i:ctnr__contains':'/70/'")
+    const [ctnr, setCtnr] = useState('')
     const [poNumber, setPoNumber] = useState('')
     const [usePoNumber, setUsePoNumber] = useState(false)
     const [serialNumber, setSerialNumber] = useState('')
@@ -65,7 +65,7 @@ function Input() {
 
     const ClearForm = () => {
         setName('')
-        setCtnr("'i:ctnr__contains':'/70/'")
+        setCtnr('')
         setPoNumber('')
         setSerialNumber('')
         setLocation('')
@@ -129,7 +129,7 @@ function Input() {
             <div className='flex gap-4'>
                 <label className='text outline-none' htmlFor="selectOption">Container: </label>
                 <select className='rounded px-[.5rem] py-[.25rem]' id="selectOption" value={ctnr} onChange={handleCtnrChange}>
-                    <option value="'/70/'">Forestry</option>
+                    {/*<option value="'/70/'">Forestry</option>*/}
                     <option value="">All</option>
                 </select>
             </div>

@@ -119,6 +119,9 @@ function Input() {
             if (response.status === 200) {
                 ClearForm()
             }
+            console.log(response)
+            console.log(response.data)
+            console.log(response.result)
         }
         )
     }

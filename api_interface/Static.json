@@ -1,0 +1,57 @@
+{
+  name: "FOR-SUPPER",
+  ip_str: "10.207.18.175",
+  mac_addr: "aC:1A:3D:6F:53:27",
+  po_number: "P0247244",
+  serial_number: "9B0JFY3",
+  hardware_type: "XPS 15",
+  location: "PFSC 209"
+}
+
+{
+  count: 1,
+  systems: [
+    {
+      id: 98293,
+      name: "FOR-SUPPER",
+      fqdn: "FOR-SUPPER.forestry.oregonstate.edu",
+      ip_str: "10.207.18.175",
+      mac_addr: "ac:1a:3d:6f:53:27",
+      system_url: "https://cyder.oregonstate.edu/core/system/175656/"
+    }
+  ]
+}Raw query object: 
+{
+  name: 'FOR-SUPPER',
+  ip_str: '10.207.18.175',
+  mac_addr: 'aC:1A:3D:6F:53:27',
+  po_number: 'P0247244',
+  serial_number: '9B0JFY3',
+  hardware_type: 'XPS 15',
+  location: 'PFSC 209'
+}
+
+Processed_query_result return value: {
+  count: 1,
+  systems: [
+    {
+      id: 98293,
+      name: 'FOR-SUPPER',
+      fqdn: 'FOR-SUPPER.forestry.oregonstate.edu',
+      ip_str: '10.207.18.175',
+      mac_addr: 'ac:1a:3d:6f:53:27',
+      system_url: 'https://cyder.oregonstate.edu/core/system/175656/'
+    }
+  ]
+}
+Static interface result: 
+undefined
+
+Core system result: 
+{
+  name: 'FOR-SUPPER',
+  po_number: 'P0247244',
+  serial_number: '9B0JFY3',
+  hardware_type: 'XPS 15',
+  location: 'PFSC 209'
+}

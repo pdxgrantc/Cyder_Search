@@ -20,7 +20,7 @@ async function api_get(url, params = null) {
   }
 }
 
-function Process_Query(raw_query_result) {
+function Process_Raw_Query(raw_query_result) {
   var processed_query_result = {};
 
   if (!(Object.keys(raw_query_result).length > 0)) {
@@ -35,12 +35,12 @@ function Process_Query(raw_query_result) {
     // creat
     var cache = {};
     // add data to cache object
-    cache.id = raw_query_result.results[0].id;
-    cache.name = raw_query_result.results[0].label;
-    cache.fqdn = raw_query_result.results[0].fqdn;
-    cache.ip_str = raw_query_result.results[0].ip_str;
-    cache.mac_addr = raw_query_result.results[0].mac;
-    cache.system_url = raw_query_result.results[0].system;
+    cache.id = raw_query_result.results[i].id;
+    cache.name = raw_query_result.results[i].label;
+    cache.fqdn = raw_query_result.results[i].fqdn;
+    cache.ip_str = raw_query_result.results[i].ip_str;
+    cache.mac_addr = raw_query_result.results[i].mac;
+    cache.system_url = raw_query_result.results[i].system;
 
     processed_query_result.systems.push(cache);
   }
@@ -64,10 +64,8 @@ async function Run_Query(static_interface_obj) {
 }
 
 async function STATIC_INTERFACE_API_CALL(query_obj) {
-  // code to create query object and call api STATIC_INTERFACE endpoint
   if ((query_obj.ip_str !== '') || (query_obj.mac_addr !== '')) {
-    // create static_interface object
-    const static_interface_obj = {}
+    const static_interface_obj = {};
 
     if (query_obj.ip_str) {
       static_interface_obj["i:ip_str__exact"] = query_obj.ip_str;
@@ -76,15 +74,15 @@ async function STATIC_INTERFACE_API_CALL(query_obj) {
       static_interface_obj['i:mac__exact'] = query_obj.mac_addr;
     }
 
-    await Run_Query(static_interface_obj).then((result) => {
-      if (Object.keys(result).length > 0) {
-        const processed_query_result = Process_Query(result);
-        console.log("Processed_query_result return value:", processed_query_result);
-        return processed_query_result;
-      } else {
-        return null;
-      }
-    });
+    // Await the result directly without using .then() inside an async function
+    const result = await Run_Query(static_interface_obj);
+
+    if (Object.keys(result).length > 0) {
+      const processed_query_result = Process_Raw_Query(result);
+      return processed_query_result;
+    } else {
+      return null;
+    }
   } else {
     return null;
   }

@@ -39,25 +39,26 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '../front_end/build')));
 
-app.post('/api/search', async (req, res) => {
+app.get('/api/search', async (req, res) => {
   const data = req.body;
 
   var query = createQuery(data);
 
   console.log(query);
 
-  call_api(query)
+  await call_api(query)
     .then((result) => {
       // Send the response back to the client
       // pasrse
-      console.log(result)
+      result = JSON.stringify(result);
       result = JSON.parse(result);
-      console.log(util.inspect(result, { depth: null }));
-      console.log(result);
-      res.status(200).json(result); // Assuming you want to return the modified JSON data.
-    })
+      //result = JSON.parse(result);
+      console.log(result)
+      // send the json as data.results
+      res.json(result);
+      })
     .catch((error) => {
-      console.error('Error occurred:', error.message);
+      console.error('Error occurred t:', error.message);
       res.status(500).json({ error: error.message }); // Send an error response to the client.
     });
 });
@@ -77,19 +78,19 @@ function createQuery(data) {
     query['i:ctnr__contains'] = data.ctnr;
   }
   if ((data.useName) || (data.name !== '')) {
-    query['i:name__contains'] = data.name;
+    query.name = data.name;
   }
   if ((data.usePoNumber) || (data.poNumber !== '')) {
-    query['a:po_number__contains'] = data.poNumber;
+    query.po_number = data.poNumber;
   }
   if ((data.useSerialNumber) || (data.serialNumber !== '')) {
-    query['a:serial_number__contains'] = data.serialNumber;
+    query.serial_number = data.serialNumber;
   }
   if ((data.useLocation) || (data.location !== '')) {
-    query['a:location__contains'] = data.location;
+    query.location = data.location;
   }
   if ((data.useHardwareType) || (data.hardwareType !== '')) {
-    query['a:hardware_type__contains'] = data.hardwareType;
+    query.hardware_type = data.hardwareType;
   }
   if ((data.useIP) || (data.ipAddr !== '')) {
     query.ip_str = data.ipAddr;

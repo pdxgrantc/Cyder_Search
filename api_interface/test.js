@@ -31,16 +31,16 @@ function createQuery(data) {
     return query;
 }
 
-function main() {
+async function main() {
 
     const query = {
         name: 'FOR-SUPPER',
         ip_str: '10.207.18.175',
-        mac_addr: 'aC:1A:3D:6F:53:27',
-        po_number: 'P0247244',
-        serial_number: '9B0JFY3',
-        hardware_type: 'XPS 15',
-        location: 'PFSC 209',
+        //mac_addr: 'aC:1A:3D:6F:53:27',
+        //po_number: 'P0247244',
+        //serial_number: '9B0JFY3',
+        hardware_type: 'Lenovo',
+        //location: 'PFSC 208',
     }
     /*
     const query = {
@@ -49,7 +49,10 @@ function main() {
         po_number: 'P024',
     }
     */
-    call_api(query)
+    await call_api(query)
+        .then((result) => {
+            console.log(JSON.stringify(result, null, 2));
+        })
 }
 
 main()

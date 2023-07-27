@@ -32,7 +32,7 @@ function createQuery(data) {
 }
 
 function main() {
-    /*
+
     const query = {
         name: 'FOR-SUPPER',
         ip_str: '10.207.18.175',
@@ -42,10 +42,13 @@ function main() {
         hardware_type: 'XPS 15',
         location: 'PFSC 209',
     }
-    */
+    /*
     const query = {
+        ip_str: '10.207.18.175',
         serial_number: '9B0JFY3',
+        po_number: 'P024',
     }
+    */
     call_api(query)
 }
 

@@ -160,7 +160,7 @@ async function call_api(query_obj) {
   if (Object.keys(static_interface_query).length > 0) {
     const static_interface_result = await STATIC_INTERFACE_API_CALL(static_interface_query).then((result) => {
       console.log("Static interface result: ")
-      console.log(result);
+      console.log(JSON.parse(result));
     });
   }
 

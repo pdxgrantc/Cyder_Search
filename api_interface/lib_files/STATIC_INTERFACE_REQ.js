@@ -20,6 +20,49 @@ async function api_get(url, params = null) {
   }
 }
 
+function Process_Query(raw_query_result) {
+  var processed_query_result = {};
+
+  if (!(Object.keys(raw_query_result).length > 0)) {
+    return null;
+  }
+
+  raw_query_result = JSON.parse(raw_query_result);
+  processed_query_result.count = Number(raw_query_result.count);
+  processed_query_result.systems = [];
+
+  for (var i = 0; i < raw_query_result.count; i++) {
+    // creat
+    var cache = {};
+    // add data to cache object
+    cache.id = raw_query_result.results[0].id;
+    cache.name = raw_query_result.results[0].label;
+    cache.fqdn = raw_query_result.results[0].fqdn;
+    cache.ip_str = raw_query_result.results[0].ip_str;
+    cache.mac_addr = raw_query_result.results[0].mac;
+    cache.system_url = raw_query_result.results[0].system;
+
+    processed_query_result.systems.push(cache);
+  }
+
+  return processed_query_result;
+}
+
+async function Run_Query(static_interface_obj) {
+  if (Object.keys(static_interface_obj).length > 0) {
+    // call static_interface endpoint
+    try {
+      const response_data = await api_get(STATIC_INTERFACE, static_interface_obj);
+      const response_data_json = JSON.stringify(response_data).replace("/api/v1", "");
+
+      return response_data_json;
+    } catch (error) {
+      console.error('Error occurred:', error.message);
+      return JSON.stringify({ error: error.message });
+    }
+  }
+}
+
 async function STATIC_INTERFACE_API_CALL(query_obj) {
   // code to create query object and call api STATIC_INTERFACE endpoint
   if ((query_obj.ip_str !== '') || (query_obj.mac_addr !== '')) {
@@ -33,18 +76,15 @@ async function STATIC_INTERFACE_API_CALL(query_obj) {
       static_interface_obj['i:mac__exact'] = query_obj.mac_addr;
     }
 
-    if (Object.keys(static_interface_obj).length > 0) {
-      // call static_interface endpoint
-      try {
-        const response_data = await api_get(STATIC_INTERFACE, static_interface_obj);
-        const response_data_json = JSON.stringify(response_data).replace("/api/v1", "");
-
-        return response_data_json;
-      } catch (error) {
-        console.error('Error occurred:', error.message);
-        return JSON.stringify({ error: error.message });
+    await Run_Query(static_interface_obj).then((result) => {
+      if (Object.keys(result).length > 0) {
+        const processed_query_result = Process_Query(result);
+        console.log("Processed_query_result return value:", processed_query_result);
+        return processed_query_result;
+      } else {
+        return null;
       }
-    }
+    });
   } else {
     return null;
   }

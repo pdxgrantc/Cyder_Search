@@ -472,3 +472,169 @@ HARDWARE TYPE RESULTS
 LOCATION RESULTS
 {}
 null
+Raw query object: 
+{ serial_number: '9B0JFY3' }
+
+
+Core system result: 
+{ serial_number: '9B0JFY3' }
+PO NUMBER RESULTS
+{}
+
+SERIAL NUMBER RESULTS
+{}
+
+HARDWARE TYPE RESULTS
+{}
+
+LOCATION RESULTS
+{}
+null
+Raw query object: 
+{
+  ip_str: '10.207.18.175',
+  serial_number: '9B0JFY3',
+  po_number: 'P0247244'
+}
+
+Static interface result: 
+{
+  count: 1,
+  next: null,
+  previous: null,
+  results: [
+    {
+      views: [Array],
+      system: 'https://cyder.oregonstate.edu/core/system/175656/',
+      reverse_domain: 'https://cyder.oregonstate.edu/api/v1/dns/domain/23/',
+      workgroup: 'https://cyder.oregonstate.edu/api/v1/dhcp/workgroup/266/',
+      domain: 'https://cyder.oregonstate.edu/api/v1/dns/domain/537/',
+      id: 98293,
+      created: '2023-07-26T08:13:53',
+      modified: '2023-07-26T08:13:53',
+      expire: null,
+      label: 'FOR-SUPPER',
+      fqdn: 'FOR-SUPPER.forestry.oregonstate.edu',
+      ttl: 3600,
+      description: '',
+      ip_str: '10.207.18.175',
+      ip_upper: 0,
+      ip_lower: 181342895,
+      ip_type: '4',
+      mac: 'ac:1a:3d:6f:53:27',
+      dhcp_enabled: true,
+      dns_enabled: true,
+      last_seen: null
+    }
+  ]
+}
+
+Core system result: 
+{ po_number: 'P0247244', serial_number: '9B0JFY3' }
+PO NUMBER RESULTS
+{
+  count: 1,
+  next: null,
+  previous: null,
+  results: [
+    {
+      systemav_set: [Array],
+      ctnr: 'https://cyder.oregonstate.edu/api/v1/core/ctnr/70/',
+      id: 175656,
+      created: '2023-07-26T08:13:52',
+      modified: '2023-07-26T08:13:52',
+      name: 'FOR-SUPPER'
+    }
+  ]
+}
+
+SERIAL NUMBER RESULTS
+{
+  count: 1,
+  next: null,
+  previous: null,
+  results: [
+    {
+      systemav_set: [Array],
+      ctnr: 'https://cyder.oregonstate.edu/api/v1/core/ctnr/70/',
+      id: 175656,
+      created: '2023-07-26T08:13:52',
+      modified: '2023-07-26T08:13:52',
+      name: 'FOR-SUPPER'
+    }
+  ]
+}
+
+HARDWARE TYPE RESULTS
+{}
+
+LOCATION RESULTS
+{}
+null
+Raw query object: 
+{
+  ip_str: '10.207.18.175',
+  serial_number: '9B0JFY3',
+  po_number: 'P024'
+}
+
+Static interface result: 
+{
+  count: 1,
+  next: null,
+  previous: null,
+  results: [
+    {
+      views: [Array],
+      system: 'https://cyder.oregonstate.edu/core/system/175656/',
+      reverse_domain: 'https://cyder.oregonstate.edu/api/v1/dns/domain/23/',
+      workgroup: 'https://cyder.oregonstate.edu/api/v1/dhcp/workgroup/266/',
+      domain: 'https://cyder.oregonstate.edu/api/v1/dns/domain/537/',
+      id: 98293,
+      created: '2023-07-26T08:13:53',
+      modified: '2023-07-26T08:13:53',
+      expire: null,
+      label: 'FOR-SUPPER',
+      fqdn: 'FOR-SUPPER.forestry.oregonstate.edu',
+      ttl: 3600,
+      description: '',
+      ip_str: '10.207.18.175',
+      ip_upper: 0,
+      ip_lower: 181342895,
+      ip_type: '4',
+      mac: 'ac:1a:3d:6f:53:27',
+      dhcp_enabled: true,
+      dns_enabled: true,
+      last_seen: null
+    }
+  ]
+}
+
+Core system result: 
+{ po_number: 'P024', serial_number: '9B0JFY3' }
+PO NUMBER RESULTS
+{ count: 0, next: null, previous: null, results: [] }
+
+SERIAL NUMBER RESULTS
+{
+  count: 1,
+  next: null,
+  previous: null,
+  results: [
+    {
+      systemav_set: [Array],
+      ctnr: 'https://cyder.oregonstate.edu/api/v1/core/ctnr/70/',
+      id: 175656,
+      created: '2023-07-26T08:13:52',
+      modified: '2023-07-26T08:13:52',
+      name: 'FOR-SUPPER'
+    }
+  ]
+}
+
+HARDWARE TYPE RESULTS
+{}
+
+LOCATION RESULTS
+{}
+null

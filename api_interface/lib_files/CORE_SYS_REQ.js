@@ -172,7 +172,7 @@ async function CORE_SYS_API_CALL(query_str) {
       return JSON.stringify({ error: error.message });
     }
   }
-  
+
   if (processed_query_result.length == 0) {
     return null;
   }

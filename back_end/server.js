@@ -64,8 +64,8 @@ app.get('/api/search', async (req, res) => {
       console.error('Error occurred t:', error.message);
       res.status(500).json({ error: error.message }); // Send an error response to the client.
     });
-      // Send the response back to the client
-      
+  // Send the response back to the client
+
 
   // Return a response (you can customize this as per your needs)
 });

@@ -123,38 +123,3 @@ function build_query(NAME, NAMEU, PO, POU, SN, SNU, LOC, LOCU, HT, HTU, IP, IPU,
 
   return query;
 }
-
-
-
-/*
-function createQuery(data) {
-  let query = {
-  }
-  if (data.ctnr !== '') {
-    query['i:ctnr__contains'] = data.ctnr;
-  }
-  if ((data.useName) || (data.name !== '')) {
-    query.name = data.name;
-  }
-  if ((data.usePoNumber) || (data.poNumber !== '')) {
-    query.po_number = data.poNumber;
-  }
-  if ((data.useSerialNumber) || (data.serialNumber !== '')) {
-    query.serial_number = data.serialNumber;
-  }
-  if ((data.useLocation) || (data.location !== '')) {
-    query.location = data.location;
-  }
-  if ((data.useHardwareType) || (data.hardwareType !== '')) {
-    query.hardware_type = data.hardwareType;
-  }
-  if ((data.useIP) || (data.ipAddr !== '')) {
-    query.ip_str = data.ipAddr;
-  }
-  if ((data.useMac) || (data.macAddr !== '')) {
-    query.mac_addr = data.macAddr;
-  }
-
-  return query;
-}
-*/

@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Outlet,
+  NavLink,
+} from "react-router-dom";
+
+// Pages
+import Dashboard from './components/Dashboard'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Root />} caseSensitive={true}>
+          <Route index element={<Dashboard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
+}
+
+
+function Root(props) {
+  const { children } = props;
+
+  return (
+    <div className="bg text min-h-screen">
+      <header className="px-page py-[.75rem] bg-orange text-black text-5xl flex justify-between">
+        <h1 className="font-extrabold">Cyder Search</h1>
+        <nav className="font-bold text-4xl self-end">
+          <ul>
+            <li>
+              <NavLink to="/">Dashboard</NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>{children || <Outlet />}</main>
+    </div>
+  )
+
 }
 
 export default App

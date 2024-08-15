@@ -6,7 +6,7 @@ import { MdOutlineCheckBoxOutlineBlank as UncheckedBox } from "react-icons/md";
 
 
 export default function Search({ setSearchResults }) {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   console.log(isChecked);
 

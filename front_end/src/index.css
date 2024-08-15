@@ -22,3 +22,29 @@
     font-weight: regular;
     font-style: regular;
 }
+
+.custom-button {
+    position: relative;
+    text-decoration: none;
+    color: inherit; /* Keep the original color */
+  }
+  
+  .custom-button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 4px;
+    bottom: -8px;
+    left: 50%;
+    background-color: #dbdbdb;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  
+  .custom-button:hover {
+    color: #dbdbdb; /* Change color on hover */
+  }
+  
+  .custom-button:hover::after {
+    width: 100%;
+    left: 0;
+  }

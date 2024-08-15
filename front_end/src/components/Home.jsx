@@ -5,7 +5,7 @@ import Search from "./Search"
 
 import SearchResults from "./SearchResults"
 
-export default function Dashboard() {
+export default function Home() {
     const [searchResults, setSearchResults] = useState([])
 
     console.log(searchResults)

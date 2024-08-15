@@ -14,7 +14,19 @@ export default {
         offwhite: '#f7f5f5',
       },
       fontSize: {
-        DEFAULT: '1rem',
+        DEFAULT: '1.25rem',
+        mobile: '1.25rem',
+        title: '5rem',
+        xxlheader: '4.25rem',
+        xlheader: '3.75rem',
+        lheader: '3.25rem',
+        header: '2.75rem',
+        subheader: '2.25rem',
+        xxl: '2rem',
+        xl: '1.75rem',
+        l: '1.5rem',
+        m: '1.25rem',
+        s: '1rem',
       },
       backgroundColor: {
         DEFAULT: '#423e3c',
@@ -22,6 +34,7 @@ export default {
         black: '#000000',
         white: '#FFFFFF',
         darkbg: '#423e3c',
+        offwhite: '#f7f5f5',
       },
       padding: {
         page: '5rem',

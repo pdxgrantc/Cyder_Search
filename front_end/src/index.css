@@ -26,25 +26,38 @@
 .custom-button {
     position: relative;
     text-decoration: none;
-    color: inherit; /* Keep the original color */
-  }
-  
-  .custom-button::after {
+    color: inherit;
+    /* Keep the original color */
+}
+
+.custom-button::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 4px;
+    height: 2px;
     bottom: -8px;
     left: 50%;
-    background-color: #dbdbdb;
+    background-color: #ffffff;
     transition: width 0.3s ease, left 0.3s ease;
-  }
-  
-  .custom-button:hover {
-    color: #dbdbdb; /* Change color on hover */
-  }
-  
-  .custom-button:hover::after {
+}
+
+.custom-button:hover {
+    color: #ffffff;
+    /* Change color on hover */
+}
+
+.custom-button:hover::after {
     width: 100%;
     left: 0;
-  }
+}
+
+
+.dropdown-content {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+}
+
+.dropdown-content.open {
+    height: auto;
+}

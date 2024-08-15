@@ -40,7 +40,7 @@ export default {
         page: '5rem',
       },
       margin: {
-        page: '3rem 5rem',
+        page: '2rem 5rem',
       },
       borderRadius: {
         default: '0.5rem',

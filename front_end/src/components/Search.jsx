@@ -8,8 +8,6 @@ import { MdOutlineCheckBoxOutlineBlank as UncheckedBox } from "react-icons/md";
 export default function Search({ setSearchResults }) {
   const [isChecked, setIsChecked] = useState(true);
 
-  console.log(isChecked);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,7 +34,6 @@ export default function Search({ setSearchResults }) {
       .then((res) => res.json())
       .then((data) => {
         setSearchResults(data.results); // Directly set the results
-        console.log('Search results:', data);
       })
       .catch((error) => {
         console.error('Error fetching search results:', error);

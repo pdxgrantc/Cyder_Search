@@ -20,18 +20,17 @@ app.post('/api/search', async (req, res) => {
     return res.status(400).send('Query parameter "q" is required');
   }
 
-  try {
+  const response = await requests.searchSystem(searchQuery);
 
-    
-    const response = await requests.searchSystem(searchQuery);
-    console.log('Search Query:', searchQuery);
-    //console.log('Response data:', response.data);
+  res.status(response.status).send(response.data);
 
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).send('Error fetching data from external API');
-  }
 });
+
+// TODO create a route for next page that takes a url and returns the next page of results
+app.get('/api/nextpage', async (req, res) => {
+  res.status(200).send('Not implemented');
+});
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

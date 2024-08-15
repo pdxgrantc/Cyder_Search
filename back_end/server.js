@@ -21,8 +21,11 @@ app.post('/api/search', async (req, res) => {
   }
 
   try {
+
+    
     const response = await requests.searchSystem(searchQuery);
-    console.log('Response data:', response.data);
+    console.log('Search Query:', searchQuery);
+    //console.log('Response data:', response.data);
 
     res.json(response.data);
   } catch (error) {

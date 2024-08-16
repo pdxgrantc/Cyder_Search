@@ -1,10 +1,11 @@
 import { useState } from "react"
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 // components
 import Search from "./Search"
 import SearchResults from "./SearchResults"
 
-export default function Home() {
+const Home = () => {
     const [searchResults, setSearchResults] = useState([])
     const [nextPage, setNextPage] = useState(null)
 
@@ -31,7 +32,10 @@ export default function Home() {
     }
 
     return (
-        <>
+        <HelmetProvider>
+          <Helmet>
+            <title>Cyder Search</title>
+          </Helmet>
             <Search setSearchResults={setSearchResults} setNextPage={setNextPage} />
             {searchResults.length !== 0 &&
                 <SearchResults searchResults={searchResults} />
@@ -41,6 +45,8 @@ export default function Home() {
                     <button onClick={fetchNextPage} className="btn btn-primary">Load More</button>
                 }
             </div>
-        </>
+        </HelmetProvider>
     )
 }
+
+export default Home

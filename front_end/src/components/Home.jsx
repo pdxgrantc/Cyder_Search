@@ -33,13 +33,15 @@ const Home = () => {
 
     return (
         <HelmetProvider>
-          <Helmet>
-            <title>Cyder Search</title>
-          </Helmet>
-            <Search setSearchResults={setSearchResults} setNextPage={setNextPage} />
-            {searchResults.length !== 0 &&
-                <SearchResults searchResults={searchResults} />
-            }
+            <Helmet>
+                <title>Cyder Search</title>
+            </Helmet>
+            <div className="flex flex-col gap-10">
+                <Search setSearchResults={setSearchResults} setNextPage={setNextPage} />
+                {searchResults.length !== 0 &&
+                    <SearchResults searchResults={searchResults} />
+                }
+            </div>
             <div>
                 {nextPage &&
                     <button onClick={fetchNextPage} className="btn btn-primary">Load More</button>

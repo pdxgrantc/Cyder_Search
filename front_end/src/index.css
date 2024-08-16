@@ -23,14 +23,14 @@
     font-style: regular;
 }
 
-.custom-button {
+.header-button {
     position: relative;
     text-decoration: none;
     color: inherit;
     /* Keep the original color */
 }
 
-.custom-button::after {
+.header-button::after {
     content: '';
     position: absolute;
     width: 0;
@@ -41,15 +41,46 @@
     transition: width 0.3s ease, left 0.3s ease;
 }
 
-.custom-button:hover {
+.header-button:hover {
     color: #ffffff;
     /* Change color on hover */
 }
 
-.custom-button:hover::after {
+.header-button:hover::after {
     width: 100%;
     left: 0;
 }
+
+
+
+.page-button {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    /* Keep the original color */
+}
+
+.page-button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -8px;
+    left: 50%;
+    background-color: #ffffff;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.page-button:hover {
+    color: #ffffff;
+    /* Change color on hover */
+}
+
+.page-button:hover::after {
+    width: 100%;
+    left: 0;
+}
+
 
 
 .dropdown-content {

@@ -10,7 +10,7 @@ export default {
         custom: ['stratum2', 'sans-serif'],
       },
       textColor: {
-        DEFAULT: '#f7f5f5',
+        DEFAULT: '#ebebeb',
         offwhite: '#f7f5f5',
       },
       fontSize: {

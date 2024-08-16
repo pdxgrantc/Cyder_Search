@@ -45,8 +45,8 @@ function PageHeader() {
       <div className="m-x_page flex justify-between h-fit">
         <h1 className="font-extrabold">Cyder Search</h1>
         <nav className="font-bold text-4xl self-end flex gap-5">
-          <NavLink className="custom-button" to="/">Home</NavLink>
-          <NavLink className="custom-button" to="/help">Help</NavLink>
+          <NavLink className="header-button" to="/">Home</NavLink>
+          <NavLink className="header-button" to="/help">Help</NavLink>
         </nav>
       </div>
     </header>

@@ -21,7 +21,7 @@ export default {
         xlheader: '3.75rem',
         lheader: '3.25rem',
         header: '2.75rem',
-        subheader: '2.25rem',
+        subheader: '2.5rem',
         xxl: '2rem',
         xl: '1.75rem',
         l: '1.5rem',

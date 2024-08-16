@@ -31,7 +31,7 @@ export default function Home() {
     }
 
     return (
-        <div className="m-page flex flex-col gap-5">
+        <>
             <Search setSearchResults={setSearchResults} setNextPage={setNextPage} />
             {searchResults.length !== 0 &&
                 <SearchResults searchResults={searchResults} />
@@ -41,6 +41,6 @@ export default function Home() {
                     <button onClick={fetchNextPage} className="btn btn-primary">Load More</button>
                 }
             </div>
-        </div>
+        </>
     )
 }

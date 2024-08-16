@@ -38,7 +38,9 @@ function Root(props) {
           <NavLink className="custom-button" to="/help">Help</NavLink>
         </nav>
       </header>
-      <main className="flex-grow">{children || <Outlet />}</main>
+      <div className="m-page flex flex-col gap-5">
+        <main className="flex-grow">{children || <Outlet />}</main>
+      </div>
     </div>
   );
 }

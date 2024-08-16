@@ -31,18 +31,26 @@ function Root(props) {
 
   return (
     <div className="text bg min-h-screen w-full flex flex-col">
-      <header className="px-page h-[5rem] bg-orange text-black text-5xl flex justify-between">
-        <h1 className="font-extrabold">Cyder Search</h1>
-        <nav className="font-bold text-4xl self-end flex gap-5">
-          <NavLink className="custom-button" to="/">Home</NavLink>
-          <NavLink className="custom-button" to="/help">Help</NavLink>
-        </nav>
-      </header>
+      <PageHeader />
       <div className="m-page flex flex-col gap-5">
         <main className="flex-grow">{children || <Outlet />}</main>
       </div>
     </div>
   );
+}
+
+function PageHeader() {
+  return (
+    <header className="h-[5rem] bg-orange text-black text-5xl flex flex-col justify-center">
+      <div className="m-x_page flex justify-between h-fit">
+        <h1 className="font-extrabold">Cyder Search</h1>
+        <nav className="font-bold text-4xl self-end flex gap-5">
+          <NavLink className="custom-button" to="/">Home</NavLink>
+          <NavLink className="custom-button" to="/help">Help</NavLink>
+        </nav>
+      </div>
+    </header>
+  )
 }
 
 export default App

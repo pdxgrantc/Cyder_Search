@@ -26,9 +26,16 @@ app.post('/api/search', async (req, res) => {
 
 });
 
-// TODO create a route for next page that takes a url and returns the next page of results
-app.get('/api/nextpage', async (req, res) => {
-  res.status(200).send('Not implemented');
+app.get('/api/nextpage', async (req, res) => {f
+  const arg = req.query.arg;
+
+  if (!arg) {
+    return res.status(400).send('Missing required argument: arg');
+  }
+
+  const response = await requests.getNextPage(arg);
+
+  res.status(response.status).send(response.data);
 });
 
 

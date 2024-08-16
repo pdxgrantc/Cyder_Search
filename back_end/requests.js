@@ -10,7 +10,7 @@ function buildQueryString(params) {
     return queryParts.join('&');
 }
 
-function runQuery(queryString) {
+async function runQuery(queryString) {
     return axios.get(`https://cyder.oregonstate.edu/api/v1/core/system/${queryString}`, {
         headers: {
             'Authorization': 'Token 1ba31a00e6569df39390e0dba2d8f90b772564ba'
@@ -18,7 +18,15 @@ function runQuery(queryString) {
     });
 }
 
-function searchSystem({
+async function getNextPage(url) {
+    return axios.get(url, {
+        headers: {
+            'Authorization': 'Token 1ba31a00e6569df39390e0dba2d8f90b772564ba'
+        }
+    });
+}
+
+async function searchSystem({
     name = '',
     department = '',
     hardwareType = '',
@@ -34,7 +42,7 @@ function searchSystem({
     limitToForestry = '',
 }) {
 
-    
+
 
     var queryString = '';
 
@@ -72,12 +80,14 @@ function searchSystem({
         queryString = queryString + "&" + attributesString;
     }
 
-    //return queryString;
-    return axios.get(`https://cyder.oregonstate.edu/api/v1/core/system/${queryString}`, {
-        headers: {
-            'Authorization': 'Token 1ba31a00e6569df39390e0dba2d8f90b772564ba'
-        }
-    });
+    try {
+        const returnVal = await runQuery(queryString);
+
+        return returnVal;
+    } catch (error) {
+        console.error('Error in runQuery:', error);
+        throw error;
+    }
 }
 
 
@@ -123,5 +133,6 @@ function searchSystem({
 */
 
 module.exports = {
-    searchSystem
+    searchSystem,
+    getNextPage
 };

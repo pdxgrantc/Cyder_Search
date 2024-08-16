@@ -5,7 +5,7 @@ import { IoMdCheckboxOutline as CheckedBox } from "react-icons/io";
 import { MdOutlineCheckBoxOutlineBlank as UncheckedBox } from "react-icons/md";
 
 
-export default function Search({ setSearchResults }) {
+export default function Search({ setSearchResults, setNextPage }) {
   const [isChecked, setIsChecked] = useState(true);
 
   const handleSubmit = (e) => {
@@ -34,6 +34,11 @@ export default function Search({ setSearchResults }) {
       .then((res) => res.json())
       .then((data) => {
         setSearchResults(data.results); // Directly set the results
+        if (data.next) {
+          setNextPage(data.next); // Set the next page
+        } else {
+          setNextPage(null);
+        }
       })
       .catch((error) => {
         console.error('Error fetching search results:', error);
@@ -62,7 +67,7 @@ export default function Search({ setSearchResults }) {
         <input className='rounded outline-none px-2 py-.5' type="text" name="userId" placeholder="User ID" />
         <input className='rounded outline-none px-2 py-.5' type="text" name="warrantyDate" placeholder="Warranty Date" />
         <label htmlFor="limitToForestry" className="flex items-center gap-2 bg-white rounded cursor-pointer px-2 py-.5">
-          
+
           <input
             type="checkbox"
             name="limitToForestry"

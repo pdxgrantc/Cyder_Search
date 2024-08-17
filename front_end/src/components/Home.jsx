@@ -42,11 +42,9 @@ const Home = () => {
                     <SearchResults searchResults={searchResults} />
                 }
             </div>
-            <div>
-                {nextPage &&
-                    <button onClick={fetchNextPage} className="btn btn-primary">Load More</button>
-                }
-            </div>
+            {nextPage &&
+                <button onClick={fetchNextPage} className="my-5 ml-12 text-xl relative after:content-[''] after:absolute after:w-0 after:h-[2.5px] after:bg-white after:left-1/2 after:bottom-0 after:transition-all after:duration-300 hover:after:w-full hover:after:left-0">Load More</button>
+            }
         </HelmetProvider>
     )
 }

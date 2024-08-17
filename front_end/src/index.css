@@ -67,14 +67,14 @@
     height: 2px;
     bottom: -8px;
     left: 50%;
-    background-color: #ffffff;
     transition: width 0.3s ease, left 0.3s ease;
 }
 
+/*
 .page-button:hover {
     color: #ffffff;
-    /* Change color on hover */
 }
+*/
 
 .page-button:hover::after {
     width: 100%;

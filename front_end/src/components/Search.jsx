@@ -83,16 +83,3 @@ export default function Search({ setSearchResults, setNextPage }) {
     </div>
   );
 }
-
-/*
-<div
-          className="flex items-center gap-2 bg-white rounded px-2 py-0.5 cursor-pointer"
-          onClick={handleCheckboxClick}
-        >
-          <input className="hidden" type="checkbox" name="limitToForestry" id="limitToForestry" checked={isChecked} />
-          <label htmlFor="limitToForestry" className="text-black cursor-pointer flex items-center gap-2">
-            Limit to Forestry
-            {isChecked ? <CheckedBox className="checked-icon" /> : <UncheckedBox className="unchecked-icon" />}
-          </label>
-        </div>
-        */

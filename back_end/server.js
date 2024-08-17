@@ -26,7 +26,8 @@ app.post('/api/search', async (req, res) => {
 
 });
 
-app.get('/api/nextpage', async (req, res) => {f
+app.get('/api/nextpage', async (req, res) => {
+  f
   const arg = req.query.arg;
 
   if (!arg) {
@@ -36,6 +37,11 @@ app.get('/api/nextpage', async (req, res) => {f
   const response = await requests.getNextPage(arg);
 
   res.status(response.status).send(response.data);
+});
+
+// if no route is matched by now, it must be a 404
+app.use((req, res) => {
+  res.status(404).send('404 - Not Found');
 });
 
 

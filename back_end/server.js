@@ -27,7 +27,6 @@ app.post('/api/search', async (req, res) => {
 });
 
 app.get('/api/nextpage', async (req, res) => {
-  f
   const arg = req.query.arg;
 
   if (!arg) {

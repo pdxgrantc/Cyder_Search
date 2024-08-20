@@ -9,7 +9,7 @@ import {
 // Pages
 import Home from './components/Home'
 import Help from "./components/Help";
-
+import Error from "./components/Error";
 
 function App() {
 
@@ -19,6 +19,7 @@ function App() {
         <Route path="/" element={<Root />} caseSensitive={true}>
           <Route index element={<Home />} />
           <Route path="/help" element={<Help />} />
+          <Route path="*" element={<Error />} />
         </Route>
       </Routes>
     </BrowserRouter>

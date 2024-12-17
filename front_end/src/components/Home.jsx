@@ -11,7 +11,7 @@ const Home = () => {
 
     const fetchNextPage = async () => {
         const encodedNextPage = encodeURIComponent(nextPage);
-        fetch(`http://for-helpdesk-web.forestry.oregonstate.edu:3000/api/nextpage?arg=${encodedNextPage}`, {
+        fetch(`http://localhost:3000/api/nextpage?arg=${encodedNextPage}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

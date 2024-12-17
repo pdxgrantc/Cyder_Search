@@ -24,7 +24,7 @@ export default function Search({ setSearchResults, setNextPage }) {
     formObject['limitToForestry'] = isChecked;
 
     // Send the form data as JSON in a POST request
-    fetch('http://for-helpdesk-web.forestry.oregonstate.edu:3000/api/search', {
+    fetch('http://localhost:3000/api/search', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
